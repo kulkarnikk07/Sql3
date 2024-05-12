@@ -27,10 +27,10 @@ on b.arrival_time = c.btime
 select distinct activity_date as day, count(distinct user_id) active_users
 from Activity
 where 
-#activity_date between date_add('2019-07-27', interval -29 day) and '2019-07-27'
-#activity_date between date_sub('2019-07-27', interval 29 day) and '2019-07-27'
+-- activity_date between date_add('2019-07-27', interval -29 day) and '2019-07-27'
+-- activity_date between date_sub('2019-07-27', interval 29 day) and '2019-07-27'
 DATEDIFF('2019-07-27',activity_date) BETWEEN 0 AND 29
-#activity_date between '2019-06-28' and '2019-07-27'
+--activity_date between '2019-06-28' and '2019-07-27'
 group by activity_date
 order by activity_date
 
