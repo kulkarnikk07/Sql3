@@ -36,4 +36,13 @@ order by activity_date
 
 -- 4 Problem 4 :Dynamic Pivoting of a Table	(	https://leetcode.com/problems/dynamic-pivoting-of-a-table/ )
 
-
+CREATE PROCEDURE PivotProducts()
+BEGIN
+SET SESSION GROUP_CONCAT_MAX_LEN = 1000000; 
+select GROUP_CONCAT(DISTINCT CONCAT('sum(if(store = "',store,'", price, null)) as ',store)) INTO @sql from Products;
+SET @sql = CONCAT('select product_id, ',@sql, ' from Products group by product_id');
+select @sql;
+PREPARE STATEMENT from @sql;
+EXECUTE STATEMENT;
+DEALLOCATE PREPARE STATEMENT; 
+END
